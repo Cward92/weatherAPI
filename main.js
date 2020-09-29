@@ -1,4 +1,3 @@
-
 const key = "3fe7090d8590b76b6cb699220cf98822";
 
 var nameInput = document.getElementById('zip');
@@ -19,11 +18,11 @@ nameInput.addEventListener('submit', function (e) {
 
 function getWeather(zip){
     let x = `https://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${key}`;
-    fetch(x).then(Response => Response.json()).then(data => populateWeather(data));
+    fetch(x).then(Response => Response.json()).then(data => populateWeather(data)).catch(alert('Error: Location Not Found, Please enter Valid Zipcode'));
 };
 
 function populateWeather(data){
-    let pic = "http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png"
+    let pic = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
     let celsius = (data.main.temp - 273.15);
     let fahrenheit = celsius * (9/5) + 32;
  
