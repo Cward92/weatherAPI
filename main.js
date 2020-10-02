@@ -10,15 +10,18 @@ nameInput.addEventListener('submit', function (e) {
     if (zip.length != 5) {
         console.error('Invalid Zip Code');
         alert('Invalid zipcode');
-        return;
+    } else {
+        getWeather(zip);
     }
 
-    getWeather(zip);
 });
 
 function getWeather(zip) {
     let x = `https://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${key}`;
-    fetch(x).then(Response => Response.json()).then(data => populateWeather(data)).catch(alert('Error: Location Not Found, Please enter Valid Zipcode'));
+    fetch(x)
+        .then(Response => Response.json())
+        .then(data => populateWeather(data))
+        .catch(e => { alert('Error: Location Not Found, Please enter Valid Zipcode') });
 };
 
 function populateWeather(data) {
